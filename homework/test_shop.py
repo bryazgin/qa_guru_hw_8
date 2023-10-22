@@ -19,11 +19,20 @@ class TestProducts:
 
     def test_product_check_quantity(self, product):
         # TODO напишите проверки на метод check_quantity
-        pass
+        assert Product.check_quantity(product, 999) == True
+        assert Product.check_quantity(product, 1000) == True
+        assert Product.check_quantity(product, 1001) == False
+        print(Product.check_quantity(product, 1999))
 
     def test_product_buy(self, product):
         # TODO напишите проверки на метод buy
-        pass
+
+        # ПЕРЕДЕЛАТЬ
+
+
+        assert Product.buy(product, 999) == 1
+        assert str(Product.buy(product, 12000)) == 'Запрашиваемого продукта нет в таком количестве'
+
 
     def test_product_buy_more_than_available(self, product):
         # TODO напишите проверки на метод buy,

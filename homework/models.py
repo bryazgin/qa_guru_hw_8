@@ -48,6 +48,14 @@ class Cart:
     # Словарь продуктов и их количество в корзине
     products: dict[Product, int]
 
+    # {
+    #     item1 : 2,
+    #     item2 : 1,
+    #     item3 : 6,
+    #     item4 : 4,
+    #     item5 : 2
+    # }
+
     def __init__(self):
         # По-умолчанию корзина пустая
         self.products = {}
@@ -69,15 +77,24 @@ class Cart:
         Если remove_count больше, чем количество продуктов в позиции, то удаляется вся позиция
         """
         if product in self.products:
-            self.products[product] -= remove_count
-            if remove_count is None or remove_count > self.products[product]
+            if remove_count is None or remove_count > self.products[product]:
                 self.products[product] = 0
+            else:
+                self.products[product] -= remove_count
+        else:
+            raise ValueError
 
     def clear(self):
-        raise NotImplementedError
+        for product in list(self.products):
+            del self.products[product]
+        return self.products
 
     def get_total_price(self) -> float:
-        raise NotImplementedError
+        total_price = 0
+        for product in list(self.products):
+            total_price += self.products.values()
+            #[product.price]
+        return total_price
 
     def buy(self):
         """
@@ -86,3 +103,4 @@ class Cart:
         В этом случае нужно выбросить исключение ValueError
         """
         raise NotImplementedError
+

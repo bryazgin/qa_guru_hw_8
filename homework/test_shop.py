@@ -99,5 +99,18 @@ class TestCart:
         cart.add_product(product, 4)
         cart.add_product(product2, 1)
         cart.add_product(product, 3)
-        assert cart.get_total_price() == 750
+        assert cart.get_total_price() == 750.0
+
+
+    def test_cart_buy(self, product, product2, cart):
+        """
+        Проверки на метод buy
+        """
+        # with pytest.raises(ValueError, match='Запрашиваемого продукта нет в таком количестве'):
+        #     cart.buy()
+
+        cart.add_product(product, 10)
+        cart.buy()
+        assert product.quantity == 990
+
 

@@ -23,17 +23,16 @@ class Product:
         else:
             return False
 
-
     def buy(self, quantity):
         """
         TODO реализуйте метод покупки
             Проверьте количество продукта используя метод check_quantity
             Если продуктов не хватает, то выбросите исключение ValueError
         """
-        if Product.check_quantity(self, quantity) is not True:
-            raise ValueError("Запрашиваемого продукта нет в таком количестве")
+        if Product.check_quantity(self, quantity):
+            self.quantity -= quantity
         else:
-            return self.quantity - quantity
+            raise ValueError("Запрашиваемого продукта нет в таком количестве")
 
     def __hash__(self):
         return hash(self.name + self.description)
@@ -47,7 +46,6 @@ class Cart:
 
     # Словарь продуктов и их количество в корзине
     products: dict[Product, int]
-
 
     def __init__(self):
         # По-умолчанию корзина пустая
@@ -96,5 +94,3 @@ class Cart:
         for product, quantity in self.products.items():
             product.buy(quantity)
         self.products.clear()
-
-

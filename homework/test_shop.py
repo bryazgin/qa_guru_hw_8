@@ -114,7 +114,7 @@ class TestCart:
 
         with pytest.raises(ValueError):
             cart.add_product(product, 5000)
-            cart.buy()
+            assert cart.buy()
 
 
 
